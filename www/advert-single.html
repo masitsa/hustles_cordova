@@ -1,0 +1,26 @@
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<!-- Top Navbar-->
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="left"><a href="#" onclick="myStopFunction();get_adverts();" class="back link"><i class="fa fa-angle-left"></i><span>Back</span></a></div>
+    <div class="center sliding">ADVERTISMENTS</div>
+  </div>
+</div>
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="advert-single" class="page">
+
+    <!-- Scrollable page content-->
+    <div class="page-content">
+      <div class="content-block">
+        <div class="content-block-inner">
+          <div id="loader-wrapper" class="display_none">
+              <div id="loader"></div>
+          </div>
+          <input type="hidden" name="" id="advert_timer">
+          <div class="video-gallery" id="single_advert"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

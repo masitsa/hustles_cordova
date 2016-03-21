@@ -1,0 +1,94 @@
+
+<!-- We don't need full layout here, because this page will be parsed with Ajax-->
+<!-- Top Navbar-->
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="left"><a href="dashboard.html#" class="back link"><i class="fa fa-angle-left"></i><span>Back</span></a></div>
+    <div class="center sliding"><img src="img/logo.png" alt=""></div>
+  </div>
+</div>
+<div class="pages">
+  <!-- Page, data-page contains page name-->
+  <div data-page="dashoboard" class="page">
+    <!-- Scrollable page content-->
+    <div class="page-content">
+      <div class="content-block">
+        <div class="content-block-inner">	
+			<div class="dashboard-area">
+				<div class="dashboard-title">
+					<h1>Dashboard</h1>
+					<p>Welcome to admin panel !</p>				
+				</div>	
+				<div class="row">
+						<div class="col-50 tablet-25">
+							<div class="single-features-dashboard">
+								<a href="jobs.html" onclick="get_jobs(3);">
+									<div class="features-icon">
+										<img src="img/dashboard/search.png" alt="">
+									</div>
+									<div class="features-info-text">
+										<h4>AVAILABLE JOBS</h4>
+										
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-50 tablet-25">
+							<div class="single-features-dashboard">
+								<a href="jobs.html" onclick="get_jobs(0);">
+									<div class="features-icon">
+										<img src="img/dashboard/applied.png" alt="">
+									</div>
+									<div class="features-info-text">
+										<h4>REQUESTED JOBS</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+					<!-- single-features start -->
+						<div class="col-50 tablet-25">
+							
+							<div class="single-features-dashboard">
+								<a href="jobs.html" onclick="get_jobs(1);">
+								<div class="features-icon">
+									<img src="img/dashboard/assigned.png" alt="">
+								</div>
+								<div class="features-info-text">
+									<h4>ASSIGNED JOBS</h4>
+									
+								</div>
+								</a>
+							</div>
+							
+						</div>
+						<div class="col-50 tablet-25">
+							<div class="single-features-dashboard">
+								<a href="jobs.html" onclick="get_jobs(2);">
+									<div class="features-icon">
+										<img src="img/dashboard/completed.png" alt="">
+									</div>
+									<div class="features-info-text">
+										<h4>COMPLETED JOBS</h4>
+										
+									</div>
+								</a>
+							</div>
+						</div>
+						
+						
+				</div>			
+			</div>
+			
+			<!-- footer  start-->				
+			<div class="footer-area warper">
+				<div class="footer-icons">
+					
+					<p>Copyright 2015. All rights reserved NSURE LIMITED</p>
+				</div>
+			</div>
+			<!-- footer  end-->	
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

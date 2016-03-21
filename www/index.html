@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>JANTA</title>
+	
+	<!-- font Raleway link -->  
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700' rel='stylesheet' type='text/css'>
+	
+	<!-- all css here -->
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/swipebox.css">		        
+	<!-- font-awesome.min CSS -->      
+	<link rel="stylesheet" href="css/fontawesome/css/font-awesome.css">	<!-- style CSS -->    
+	<!-- style CSS -->          
+	<link rel="stylesheet" href="style.css">
+	<!-- style CSS -->          
+	<link rel="stylesheet" href="css/responsive.css">
+
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/connection.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&v=3.7"></script>
+	
+  </head>
+  <body id="mobile_wrap">
+  	<div id="loader-wrapper" class="display_none">
+	      <div id="loader"></div>
+	  </div>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal menubg">
+    	<div class="menu-hoverlay">
+			<div class="line"></div>
+			<div class="logo-box">
+				<h3><img src="img/logo2.png" alt="" /></h3>
+			</div>
+			<div class="mainmenu">
+				<div class="row">
+					<div class="col-50 display_none" id="dashboard"  >
+						<div class="menu">
+						<a href="dashboard.html" class="item-link close-panel" >
+							<img src="img/menu/1.png" alt="">
+							DASHBOARD
+							</a>
+						</div>
+					</div>
+					
+					<div class="col-50 display_none" id="profile">
+						<div class="menu">
+						<a class="item-link close-panel item-content" href="profile.html" onclick="get_profile();" >
+							<img src="img/menu/2.png" alt="">
+							PROFILE</a>
+						</div>
+					</div>
+
+					<!-- <div class="col-50">
+						<div class="menu">
+						<a class="item-link close-panel item-content" href="about.html">
+							<img src="img/menu/2.png" alt="">
+							ABOUT</a>
+						</div>
+					</div> -->
+					
+					<div class="col-100" id="left-non-clickable-item">
+						<div class="menu">
+						<a class="item-link close-panel item-content" href="" onclick="get_adverts();">
+							<img src="img/menu/10.png" alt="">
+							ADVERTISMENTS</a>
+						</div>
+					</div>
+					<div class="col-100 display_none" id="left-clickable-item">
+						<div class="menu">
+						<a class="item-link close-panel item-content" href="advertisments.html" onclick="get_adverts();">
+							<img src="img/menu/10.png" alt="">
+							ADVERTISMENTS</a>
+						</div>
+					</div>
+					
+					<div class="col-50">
+						<div class="menu">
+						<a class="item-link close-panel item-content external" href="tel:+254770827872">
+							<img src="img/menu/11.png" alt="">
+							CALL US</a>
+						</div>
+					</div>
+					<div class="col-50">
+						<div class="menu">
+						<a class="item-link close-panel item-content" href="contact.html">
+							<img src="img/menu/12.png" alt="">
+							CONTACT</a>
+						</div>
+					</div>		
+				</div>
+			</div>
+			<!-- Menu end -->
+		</div>
+    </div>
+	<!-- login screen  start-->
+	<div class="login-screen">
+	    <div class="view">
+	      <div class="page">
+	        <div class="page-content login-screen-content registerbody">
+	        	<div id="loader-wrapper" class="display_none">
+			      <div id="loader"></div>
+			  	</div>
+				<div class="register-content">
+					<a href="index.html#" class="close-login-screen floatright"> close</a>
+					<h3><img src="img/logo2.png" alt=""></h3>
+					<div id="login_response"></div>
+					<form action="register" method="post" id="login_member" >
+						<div class="inputbox">
+							<span>Email:</span><br>
+							<input type="text" name="email" id="email" placeholder="Email">
+						</div>
+						<div class="inputbox">
+							<span>Password:</span><br>
+							<input type="password" name="password" id="password" placeholder="***********">
+						</div>
+						<div class="inputbox">
+							<a data-popup=".popup-forgetpass" class="open-popup"   href="index.html#">Forget Password?</a>
+						</div>
+						<div class="inputbox">
+							<button type="submit" class="button button-big" id="submit" name="submit" >Login</button>
+						</div>						
+					</form>	
+					<p>Don’t have an account?  <a data-popup=".popup-register" class="open-popup" href="index.html#">Sign Up</a></p>
+				</div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+
+
+  <!-- login screen  start-->
+	<!-- forget password  start-->
+ <div class="popup popup-forgetpass">
+	<div class="registerbody">
+		<a href="index.html#" class="close-popup closebutton"><i class="fa fa-times"></i></a>
+		<div class="register-content">
+			<h3><img src="img/logo2.png" alt=""></h3>
+			<form action="index.html#">
+				<div class="inputbox">
+					<span>Email:</span><br>
+					<input type="email" name="password" placeholder="email@gmail.com">
+				</div>
+				<div class="inputbox">
+					<button class="button button-big">Remember me</button>
+				</div>						
+			</form>	
+			<p>Don’t have an account?<a data-popup=".popup-register" class="open-popup" href="index.html#"> Sign Up</a></p>
+		</div>
+	 </div>
+</div>
+
+  <!-- forget password  end-->
+  <!-- resister popup start-->
+<div class="popup popup-register">
+	<div class="registerbody">
+			<a href="index.html#" class="close-popup closebutton"><i class="fa fa-times"></i></a>
+	     <div class="register-content">
+			<h3><img src="img/logo2.png" alt=""></h3>
+				<form action="register_now" method="post" id="register_member" >
+					<div class="inputbox">
+						<span>Full Name:</span><br>
+						<input type="text" name="fullname" placeholder="Full Name" required>
+					</div>
+					<div class="inputbox">
+						<span>Phone Number:</span><br>
+						<input type="text" name="phone_number" placeholder="254" required>
+					</div>
+					<div class="inputbox">
+						<span>Email:</span><br>
+						<input type="email" name="email_address" placeholder="email@gmail.com" required>
+					</div>
+					
+					<div class="inputbox">
+						<button class="button button-big">Sign Up</button>
+					</div>					
+				</form>
+		</div>
+	 </div>
+</div>
+  <!-- resister popup start-->	
+    <!-- Views-->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class-->
+		<div class="view view-main">
+			<!-- Top Navbar-->
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="left">
+				  <!-- left link contains only icon - additional "icon-only" class--><a href="index.html#" class="link icon-only open-panel"><img src="img/menu.png" alt=""></a>
+					</div>
+					<!-- We have home navbar without left link-->
+					<div class="center sliding"><img src="img/logo.png" alt="" /></div>
+					<div class="right" >
+				  <!-- right link contains only icon - additional "icon-only" class-->
+				  		<a href="index.html#" id="profile_icon" data-panel="right" class="link icon-only open-login-screen"><img src="img/menu2.png" alt=""></a>
+					</div>
+				</div>
+			</div>
+
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+			<div class="pages navbar-through toolbar-through">
+			  <!-- Page, data-page contains page name-->
+				<div data-page="index" class="page">
+					
+				<!-- Scrollable page content-->
+					<div class="page-content">
+						<div class="col-100 tablet-50" id="map-canvas-add">
+							<!-- <img src="img/logo2.png" alt="" class="splash-logo"> -->
+							<!-- <input id="pac-input" class="form-control" type="text" placeholder="Search Box"> -->
+							<div id="map-canvas-item" style="height:200px;"></div>
+							<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&v=3.7"></script>
+							<script type="text/javascript">
+							get_map_home();
+							function get_map_home() {
+								var latitude, longitude;
+								latitude = -1.2920659;
+								longitude = 36.82194619999996;
+								// Try HTML5 geolocation.
+								if (navigator.geolocation) 
+								{
+									// navigator.geolocation.getCurrentPosition(function(position) 
+									// {
+									// 	latitude = position.coords.latitude;
+									// 	longitude = position.coords.longitude;
+									// }, function() {
+									// 	handleLocationError(true, infoWindow, map.getCenter());
+									// });
+									 browserSupportFlag = true;
+									    navigator.geolocation.getCurrentPosition(function(position) {
+									      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+									      map.setCenter(initialLocation);
+									    }, function() {
+									      handleNoGeolocation(browserSupportFlag);
+									    });
+								} 
+								else {
+									// Browser doesn't support Geolocation
+									handleLocationError(false, infoWindow, map.getCenter());
+								}
+								function handleNoGeolocation(errorFlag) {
+								    if (errorFlag == true) {
+								      alert("Geolocation service failed.");
+								      initialLocation = newyork;
+								    } else {
+								      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
+								      initialLocation = siberia;
+								    }
+								    map.setCenter(initialLocation);
+								  }
+								//set default location
+								var default_location = new google.maps.LatLng(latitude, longitude);
+								
+								var markers = [];
+								var map;
+									
+								var mapOptions = {
+									zoom: 13,
+									center: default_location,
+									//mapTypeId: google.maps.MapTypeId.SATELLITE
+									mapTypeId: google.maps.MapTypeId.ROADMAP
+								};
+								map = new google.maps.Map(document.getElementById('map-canvas-item'), mapOptions);
+								
+								function initialize() {
+									
+									/*marker = new google.maps.Marker({
+										map:map,
+										draggable:true,
+										animation: google.maps.Animation.DROP,
+										position: default_location,
+										title: 'Hello World!'
+									});
+									google.maps.event.addListener(marker, 'click', toggleBounce);
+									
+									marker.setMap(map);*/
+									drop();
+								}
+								function toggleBounce() {
+								
+									if (marker.getAnimation() != null) 
+									{
+										marker.setAnimation(null);
+									} 
+									else 
+									{
+										marker.setAnimation(google.maps.Animation.BOUNCE);
+									}
+								}
+								
+								//drop multiple markers one at a time
+								function drop() {
+									//clearMarkers();
+									
+									/*for (var i = 0; i < neighborhoods.length; i++) {//alert(i);
+										addMarkerWithTimeout(neighborhoods[i], i * 200);
+									}*/
+									
+									//get jobs
+									$.ajax({
+										type:'POST',
+										url: base_url+'jobs/all_jobs',
+										cache:false,
+										contentType: false,
+										processData: false,
+										dataType: 'json',
+										statusCode: {
+											302: function() {
+												//window.location.href = '<?php echo site_url();?>error';
+											}
+										},
+										success:function(data){
+											
+											if(data.message == "success")
+											{
+												var arr = $.map(data.result, function(el) { return el; });
+												
+												for (var i = 0; i < arr.length; i++)
+												{
+													var longitude = arr[i].start_location_long;
+													var latitude = arr[i].start_location_lat;
+													var job_id = arr[i].job_id;
+													var job_title = arr[i].job_title;
+													var job_description = arr[i].job_description;
+													var delivery_location_detail = arr[i].delivery_location_detail;
+													
+													var after_service = '';
+													var delivery_location_detail = 'Drop at '+delivery_location_detail;
+													
+													if(!longitude || longitude == '')
+													{
+													}
+													
+													else
+													{
+														longitude = parseFloat(longitude).toFixed(16);
+														latitude = parseFloat(latitude).toFixed(16);
+														
+														addMarkerWithTimeout(new google.maps.LatLng(latitude, longitude), i * 200, job_title, job_id, job_description, delivery_location_detail);
+														
+													}
+												}
+												
+												//alert(markers.length);
+												//add event listener
+												for (var r = 0; r < markers.length; r++) {
+													//markers[i].setMap(null);
+													google.maps.event.addListener(markers[r], 'click', function() { 
+													   alert("I am marker " + markers.title); 
+													});
+												}
+											}
+											else
+											{
+												console.log(data);
+											}
+										},
+										error: function(xhr, status, error) {
+											console.log("XMLHttpRequest=" + xhr.responseText + "\ntextStatus=" + status + "\nerrorThrown=" + error);
+										}
+									});
+								}
+								
+								//function addMarkerWithTimeout(position, timeout, job, job_id, after_service, job_location) {
+									function addMarkerWithTimeout(position, timeout, job_title, job_id, job_description, delivery_location_detail) {
+									window.setTimeout(function() {
+										
+										//create marker
+										var marker = new google.maps.Marker({
+															position: position,
+															map: map,
+															animation: google.maps.Animation.DROP,
+															title: job_title
+														});
+										
+										//add marker description
+										var contentString = '<span itemprop="streetAddress">'+job_title+'</span><br/><span itemprop="addressLocality">'+delivery_location_detail+'</span><br/><span itemprop="addressLocality">'+job_description+'</span>';
+										var infowindow = new google.maps.InfoWindow({
+											content: contentString
+										});
+										// infowindow.open(map,marker);
+										
+										//on click listener;
+										marker.addListener('click', function() 
+										{
+											infowindow.open(map,marker);
+											// var title = marker.getTitle();
+											// var conf = confirm('Are you sure you want to select '+title+'?');
+											// infowindow.open(map, marker);
+											
+											// if(conf)
+											// {
+											// 	window.location.href = '<?php echo site_url();?>hire-user/'+job_id;
+											// }
+										  });
+										/*markers.push(new google.maps.Marker({
+											position: position,
+											map: map,
+											animation: google.maps.Animation.DROP,
+											title: job
+										}));*/
+									}, timeout);
+								}
+								
+								//clear all markers
+								function clearMarkers() {
+									for (var i = 0; i < markers.length; i++) {
+										markers[i].setMap(null);
+									}
+									markers = [];
+								}
+								
+							  google.maps.event.addDomListener(window, 'load', initialize);
+							  
+							  // Create the search box and link it to the UI element.
+							  var input = document.getElementById('pac-input');
+							  var searchBox = new google.maps.places.SearchBox(input);
+							  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+							  // Bias the SearchBox results towards current map's viewport.
+							  map.addListener('bounds_changed', function() {
+								searchBox.setBounds(map.getBounds());
+							  });
+
+							  var markers = [];
+							  // Listen for the event fired when the user selects a prediction and retrieve
+							  // more details for that place.
+							  searchBox.addListener('places_changed', function() {
+								var places = searchBox.getPlaces();
+
+								if (places.length == 0) {
+								  return;
+								}
+
+								// Clear out the old markers.
+								markers.forEach(function(marker) {
+								  marker.setMap(null);
+								});
+								markers = [];
+
+								// For each place, get the icon, name and location.
+								var bounds = new google.maps.LatLngBounds();
+								places.forEach(function(place) {
+								  var icon = {
+									url: place.icon,
+									size: new google.maps.Size(71, 71),
+									origin: new google.maps.Point(0, 0),
+									anchor: new google.maps.Point(17, 34),
+									scaledSize: new google.maps.Size(25, 25)
+								  };
+
+								  // Create a marker for each place.
+								  markers.push(new google.maps.Marker({
+									map: map,
+									icon: icon,
+									title: place.name,
+									position: place.geometry.location
+								  }));
+
+								  if (place.geometry.viewport) {
+									// Only geocodes have viewport.
+									bounds.union(place.geometry.viewport);
+								  } else {
+									bounds.extend(place.geometry.location);
+								  }
+								});
+								map.fitBounds(bounds);
+								drop();
+							  });
+
+						}
+						</script>
+
+
+
+						</div>
+	 					
+						<!-- features area start-->
+						<a href="" class="" onclick="get_adverts()" id="non-clickable-adverts"><div class="accordin-title"><h3> Make Money by watching advertisments</h3></div></a>
+						<a href="advertisments.html" class="display_none" id="clickable-adverts" onclick="get_adverts();"><div class="accordin-title"><h3> Make Money by watching advertisments</h3></div></a>
+						<div class="client-area col-100 tablet-50" >
+							<div class="row">
+								<div class="col-50 tablet-25" id="available-jobs">
+									<div class="single-features-dashboard">
+										<a href="" onclick="get_jobs(3);" >
+											<div class="features-icon">
+												<img src="img/dashboard/search.png" alt="">
+											</div>
+											<div class="features-info-text">
+												<h4>AVAILABLE JOBS</h4>
+												
+											</div>
+										</a>
+									</div>
+								</div>
+								<div class="col-50 tablet-25 display_none" id="available-jobs-item">
+									<div class="single-features-dashboard">
+										<a href="jobs.html" onclick="get_jobs(3);" >
+											<div class="features-icon">
+												<img src="img/dashboard/search.png" alt="">
+											</div>
+											<div class="features-info-text">
+												<h4>AVAILABLE JOBS</h4>
+												
+											</div>
+										</a>
+									</div>
+								</div>
+
+								<div class="col-50 tablet-25 display_none" id="requested-jobs">
+									<div class="single-features-dashboard">
+										<a href="jobs.html" onclick="get_jobs(0);">
+											<div class="features-icon">
+												<img src="img/dashboard/applied.png" alt="">
+											</div>
+											<div class="features-info-text">
+												<h4>REQUESTED JOBS</h4>
+											</div>
+										</a>
+									</div>
+								</div>
+							<!-- single-features start -->
+								<div class="col-50 tablet-25 display_none" id="assigned-jobs">
+									
+									<div class="single-features-dashboard">
+										<a href="jobs.html" onclick="get_jobs(1);">
+										<div class="features-icon">
+											<img src="img/dashboard/assigned.png" alt="">
+										</div>
+										<div class="features-info-text">
+											<h4>ASSIGNED JOBS</h4>
+											
+										</div>
+										</a>
+									</div>
+									
+								</div>
+								<div class="col-50 tablet-25 display_none" id="completed-jobss">
+									<div class="single-features-dashboard">
+										<a href="jobs.html" onclick="get_jobs(2);" >
+											<div class="features-icon">
+												<img src="img/dashboard/completed.png" alt="">
+											</div>
+											<div class="features-info-text">
+												<h4>COMPLETED JOBS</h4>
+												
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+					<!-- footer  start-->				
+						<div class="footer-area warper">
+							<div class="footer-icons">
+								
+								<p>Copyright 2015. All rights reserved Janta254</p>
+							</div>
+						</div>
+						<!-- footer  end-->		
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+
+	<!-- Js -->
+	<!-- jquery-1.11.3.min js -->  
+	      
+	<!-- Path to Framework7 Library JS --> 
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!--jquery.swipebox js --> 
+    <script type="text/javascript" src="js/jquery.swipebox.js"></script>
+	<!-- Path to your app js --> 
+    <script type="text/javascript" src="js/my-app.js"></script>
+	<!-- Path to your app js --> 
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/jobs.js"></script> 
+	
+  </body>
+</html>
