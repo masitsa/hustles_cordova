@@ -82,15 +82,14 @@ function get_profile()
 
 function get_jobs(jobs_status)
 {
-	
 	var service = new Jobs_service();
 	service.initialize().done(function () {
 		console.log("Service initialized");
 	});
-	var loggged_in = window.localStorage.getItem("loggged_in");
-	// alert(loggged_in);
-	// var loggged_in = null;
-	if(loggged_in == null)
+	var logged_in = window.localStorage.getItem("logged_in");
+	// alert(logged_in);
+	// var logged_in = null;
+	if(logged_in == null)
 	{
 		myApp.openModal('.login-screen');
 	}
@@ -390,9 +389,9 @@ function get_adverts()
 		console.log("Service initialized");
 	});
 
-	// var loggged_in_other = window.localStorage.getItem("loggged_in_other");
- 	// // var loggged_in_other = window.localStorage.setItem("loggged_in_other",null);
-	// if(loggged_in_other == null)
+	// var logged_in_other = window.localStorage.getItem("logged_in_other");
+ 	// // var logged_in_other = window.localStorage.setItem("logged_in_other",null);
+	// if(logged_in_other == null)
 	// {
 	// 	myApp.openModal('.login-screen');
 	// }

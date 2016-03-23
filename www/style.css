@@ -1025,7 +1025,7 @@ width: 115px;}
   box-sizing: border-box;
   color: #ffffff;
   display: block;
-  height: 34px;
+  height: 57px;
   margin-top: 5px;
   overflow: hidden;
   padding: 10px;
@@ -1039,7 +1039,7 @@ width: 115px;}
 }
 .register-content h3 {
   color: #fff;
-  font-size: 82px;
+  font-size: 20px;
   font-weight: bolder;
   padding: 15px 0;
   text-align: center;
@@ -1734,4 +1734,4 @@ display: none;
     }
 }
 /*end of loader*/
-
+.center-align{margin:0 auto; text-align:center;}
