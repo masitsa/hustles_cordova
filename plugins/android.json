@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.janta"
+        },
+        "com.bunkerpalace.cordova.YoutubeVideoPlayer": {
+            "PACKAGE_NAME": "com.janta"
         }
     },
     "dependent_plugins": {}

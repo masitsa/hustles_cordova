@@ -69,19 +69,12 @@
 						</div>
 					</div> -->
 					
-					<div class="col-100" id="left-non-clickable-item">
+					<div class="col-100" >
 						<div class="menu">
                         
-						<a class="item-link close-panel item-content" href="advertisments.html" onclick="get_adverts();">
+						<a class="item-link close-panel item-content" onclick="load_membership()" href="#">
 							<img src="img/menu/10.png" alt="">
-							ADVERTISMENTS</a>
-						</div>
-					</div>
-					<div class="col-100 display_none" id="left-clickable-item">
-						<div class="menu">
-						<a class="item-link close-panel item-content" href="advertisments.html" onclick="get_adverts();">
-							<img src="img/menu/10.png" alt="">
-							ADVERTISMENTS</a>
+							About Membership</a>
 						</div>
 					</div>
 					
@@ -94,7 +87,7 @@
 					</div>
 					<div class="col-50">
 						<div class="menu">
-						<a class="item-link close-panel item-content" href="contact.html">
+						<a class="item-link close-panel item-content" onclick="load_contact();" href="#">
 							<img src="img/menu/12.png" alt="">
 							CONTACT</a>
 						</div>
@@ -157,7 +150,7 @@
 			<a href="#" class="close-popup closebutton"><i class="fa fa-times"></i></a>
             <div id="non_member_login_response"></div>
 			<div class="register-content">
-				<h3>Non Member Sign In</h3>
+				<h3>Sign In</h3>
 				<form action="register_now" method="post" id="login_non_member" >
 					<div class="inputbox">
 						<span>Email:</span><br>
@@ -182,7 +175,7 @@
 			<a href="#" class="close-popup closebutton"><i class="fa fa-times"></i></a>
             <div id="registration_response"></div>
 			<div class="register-content">
-				<h3>Non Member Registration</h3>
+				<h3>Registration</h3>
 				<form action="register_now" method="post" id="register_non_member" >
 					<div class="inputbox">
 						<span>Full names:</span><br>
@@ -218,13 +211,20 @@
 				<div class="navbar-inner">
 					<div class="left">
 						<!-- left link contains only icon - additional "icon-only" class-->
-    <div class="left"><a href="index.html" class="back link"><i class="fa fa-angle-left"></i><span>Back</span></a></div>
+	    				<div id="left-menu-button" class="left display_none" >
+	    					<a href="#"  class="back link" onClick="myStopFunction();"><i class="fa fa-angle-left"></i><span>Back</span></a>
+    					</div>
+    					<div id="left-menu-button-default" class="left">
+							<!-- left link contains only icon - additional "icon-only" class-->
+							<a href="#" class="link icon-only open-panel"><img src="img/menu.png" alt=""></a>
+						</div>
 					</div>
+
 					<!-- We have home navbar without left link-->
 					<div class="center sliding"><img src="img/logo.png" alt="" /></div>
-					<div class="right" >
+					<div class="right" id="profile-icon" class="display_none">
 						<!-- right link contains only icon - additional "icon-only" class-->
-				  		<a href="#" id="profile_icon" data-panel="right" class="link icon-only open-login-screen">
+				  		<a href="profile.html"  onclick="get_member_details()" >
 							<img src="img/menu2.png" alt="">
 						</a>
 					</div>
@@ -239,6 +239,7 @@
 					<!-- Scrollable page content-->
 					<div class="page-content">
 						
+
 						<!-- footer  start-->				
 						<div class="footer-area warper">
 							<div class="footer-icons">
@@ -258,6 +259,8 @@
 	<!-- jquery-1.11.3.min js -->  
 	      
 	<!-- Path to Framework7 Library JS --> 
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!--jquery.swipebox js --> 
     <script type="text/javascript" src="js/jquery.swipebox.js"></script>

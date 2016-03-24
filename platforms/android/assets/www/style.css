@@ -1403,8 +1403,8 @@ display: none;
   margin:10% 0 10% 0;
 }
 
-.display_none{display: none;}
-.display_block{display: block;}
+.display_none{display: none !important;}
+.display_block{display: block !important;}
 
 
 
