@@ -24,7 +24,7 @@ var Jobs_service = function() {
     this.get_map = function() {
 
 		var request = url + "jobs/get_map";
-		alert("sdkajsda"+request);
+		
         return $.ajax({url: request});
     }
 
@@ -40,8 +40,8 @@ var Jobs_service = function() {
 		var request = url + "profile/get_client_profile";
         return $.ajax({url: request});
     }	
-    this.getAdvertDetail = function(advert_id) {
-        var request = url + "advertising/get_advert_detail/" + advert_id;
+    this.getAdvertDetail = function(advert_id, job_seeker_id) {
+        var request = url + "advertising/get_advert_detail/" + advert_id +"/" + job_seeker_id;
         return $.ajax({url: request});
     }
     this.get_time_to_leave = function(advert_id) {
@@ -172,22 +172,84 @@ function get_job_description(job_id,job_status)
 		}
 	});
 }
+
+var playerObjects = {};
+function onYouTubePlayerReady(playerId) 
+{
+	alert(playerId);
+	playerObjects[playerId] = document.getElementById(playerId);
+}
+      
 $$(document).on('pageInit', '.page[data-page="advert-single"]', function (e) 
 {
 	var advert_id = window.localStorage.getItem("advert_id");
 	var myInterval = setInterval(function(){ start_timer_new(advert_id) }, 2000);
 	window.localStorage.setItem("myInterval",myInterval);
-	
 })
-function myStopFunction() {
-		var myInterval = window.localStorage.getItem("myInterval");
-     	clearInterval(myInterval);
+
+function myStopFunction() 
+{
+	$( "#profile-icon" ).removeClass( "display_none" );
+	$( "#left-menu-button" ).addClass( "display_none" );
+	$( "#left-menu-button-default" ).removeClass( "display_none" );
+	var myInterval = window.localStorage.getItem("myInterval");
+	clearInterval(myInterval);
+}
+$$(document).on('pageInit', '.page[data-page="my_profile_page"]', function (e) 
+{
+	myStopFunction();
+	$( "#left-menu-button-default" ).addClass( "display_none" );
+	$( "#left-menu-button" ).removeClass( "display_none" );
+	$( "#profile-icon" ).addClass( "display_none" );
+})
+
+function onYouTubeIframeAPIReady ()  { 
+  var player ; 
+  var video_id = window.localStorage.getItem("video_id");
+  player =  new YT . Player ( 'player' ,  { 
+    width :  1280 , 
+    height :  720 , 
+    videoId :  video_id , 
+    events :  { 
+      'onReady' : onPlayerReady , 
+      'onStateChange' : onPlayerStateChange , 
+      'onError' : onPlayerError 
+    } 
+  }); 
+  // window.localStorage.setItem("payer_item",player);
+}
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+	event.target.playVideo();
 }
 
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+var done = false;
+function onPlayerStateChange(event) {
+	if (event.data == YT.PlayerState.PLAYING && !done) {
+		setTimeout(stopVideo, 6000);
+		done = true;
+	}
+	else if (event.data == YT.PlayerState.PAUSED) {
+		
+		myStopFunction();
+	}
+}
+function stopVideo() {
+	// var player = window.localStorage.getItem("payer_item");
+	player.stopVideo();
+} 
+function onPlayerError() {
+	player.stopVideo();
+} 
 
-function get_advert_description(advert_id)
-{
+
+function get_advert_description(advert_id, video_id)
+{	
 	window.localStorage.setItem("advert_id",advert_id);
+	var job_seeker_id = window.localStorage.getItem("job_seeker_id");
 
 	$( "#loader-wrapper" ).removeClass( "display_none" );
 	var service = new Jobs_service();
@@ -195,17 +257,16 @@ function get_advert_description(advert_id)
 		console.log("Service initialized");
 	});
 	
-	service.getAdvertDetail(advert_id).done(function (employees) {
+	service.getAdvertDetail(advert_id, job_seeker_id).done(function (employees) {
 		var data = jQuery.parseJSON(employees);
 		
 		if(data.message == "success")
 		{
+			
 			// $( "#news-of-icpak" ).addClass( "display_block" );
 			$( "#single_advert" ).html( data.result );
 			
 			$( "#loader-wrapper" ).addClass( "display_none" );
-			
-
 		}
 		
 		else
@@ -219,6 +280,7 @@ function start_timer_new(advert_id)
 {
 	var count = 0;
 	var counter = window.localStorage.getItem('count_item');
+	var job_seeker_id = window.localStorage.getItem('job_seeker_id');
 	if(counter > 0)
 	{
 		count = counter;
@@ -232,7 +294,7 @@ function start_timer_new(advert_id)
 		count = 0;
 	}
      $.ajax({
-        url: base_url+'advertising/update_link_details/'+advert_id+'/'+count,
+        url: base_url+'advertising/update_link_details/'+advert_id+'/'+count+'/'+job_seeker_id,
         cache:false,
         contentType: false,
         processData: false,
@@ -401,7 +463,6 @@ function get_adverts()
 	    $( "#loader-wrapper" ).removeClass( "display_none" );
 		service.get_advertisments().done(function (employees) {
 			var data = jQuery.parseJSON(employees);
-		
 			if(data.message == "success")
 			{
 
@@ -412,7 +473,7 @@ function get_adverts()
 			
 			else
 			{
-
+				$( "#adverts_div" ).html( '<p>Unable to add load adverts</p>' );
 			}
 		});
 	// }

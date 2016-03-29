@@ -365,6 +365,7 @@ body{font-family: 'Open Sans', sans-serif;}
 }
 .pro-content > h4 {
   background: #3949ab none repeat scroll 0 0;
+  border-radius: 10px;
   color: #fff;
   display: inline-block;
   font-size: 13px;
@@ -1403,8 +1404,8 @@ display: none;
   margin:10% 0 10% 0;
 }
 
-.display_none{display: none;}
-.display_block{display: block;}
+.display_none{display: none !important;}
+.display_block{display: block !important;}
 
 
 

@@ -44,7 +44,7 @@ var Login_service = function() {
 
     
     this.get_member_details = function(member_no){
-    	var request = url + "login/get_member_information/" + member_no;
+    	var request = url + "profile/get_client_profile/" + member_no;
         return $.ajax({url: request});
     }
   
@@ -167,8 +167,6 @@ function onDeviceReady()
 })();
 
 
-
-
 $(document).ready(function(){
 	//automatic_login();
 	//window.localStorage.setItem("logged_in", "no");
@@ -189,8 +187,9 @@ $(document).ready(function(){
 		//else non member
 		else
 		{
-			mainView.router.loadPage('non_members.html');
+			mainView.router.loadPage('advertisments.html');
 		}
+		$( "#profile-icon" ).removeClass( "display_none" );
 	}
 	
 	//user hasn't logged in. Open login page
@@ -198,44 +197,8 @@ $(document).ready(function(){
 	{
 		mainView.router.loadPage('sign_in.html');
 	}
-});
-//automatic login
-function automatic_login()
-{
-	// alert("here");
-	$( "#loader-wrapper" ).removeClass( "display_none" );
 
-	
-	var service = new Login_service();
-	service.initialize().done(function () {
-		console.log("Service initialized");
-	});
-	
-	//get member's credentials
-	var email = window.localStorage.getItem("email");
-	var password = window.localStorage.getItem("password");
-	
-	service.automatic_login_member(email, password).done(function (employees) {
-		var data = jQuery.parseJSON(employees);//alert(email+' '+password);
-		
-		if(data.message == "success")
-		{
-			$( ".mainmenu #dashboard" ).css( "display", 'inline-block' );
-			$( ".mainmenu #profile" ).css( "display", 'inline-block' );
-			$( "#requested-jobs" ).css( "display", 'inline-block' );
-			$( "#completed-jobss" ).css( "display", 'inline-block' );
-			$( "#assigned-jobs" ).css( "display", 'inline-block' );
-			$( "#profile_icon" ).html( '<a href="profile.html" class="link icon-only" onclick="get_profile();"><img src="img/menu2.png" alt=""></a>' );
-	
-		}
-		else
-		{
-			$("#response").html('<div class="alert alert-danger center-align">'+data.result+'</div>').fadeIn( "slow");
-		}
-		
-		$( "#loader-wrapper" ).addClass( "display_none" );
-	});
-}
+});
 
 $(document).on("submit","form#login_member",function(e)
 {
@@ -268,6 +231,7 @@ $(document).on("submit","form#login_member",function(e)
 				window.localStorage.setItem("password", $("input[name=password]").val());
 				window.localStorage.setItem("logged_in", "yes");
 				window.localStorage.setItem("logged_in_type", "member");
+				$( "#profile-icon" ).removeClass( "display_none" );
 
 				myApp.closeModal('.popup-signin-member');
 				//get_map_home();
@@ -320,12 +284,13 @@ $(document).on("submit","form#login_non_member",function(e)
 				window.localStorage.setItem("email", $("input[name=email]").val());
 				window.localStorage.setItem("password", $("input[name=password]").val());
 				window.localStorage.setItem("logged_in", "yes");
+				window.localStorage.setItem("job_seeker_id", data.job_seeker_id);
 				window.localStorage.setItem("logged_in_type", "non_member");
 
 				myApp.closeModal('.popup-signin-non-member');
 				//get_map_home();
 				var mainView = myApp.addView('.view-main');
-				mainView.router.loadPage('non_members.html');
+				mainView.router.loadPage('advertisments.html');
 			}
 			else
 			{
@@ -372,6 +337,7 @@ $(document).on("submit","form#register_non_member",function(e)
                 window.localStorage.setItem("phone_number", $("input[name=phone_number]").val());
                 window.localStorage.setItem("fullname", $("input[name=fullname]").val());
 				window.localStorage.setItem("logged_in", "yes");
+				window.localStorage.setItem("job_seeker_id", data.job_seeker_id);
 				window.localStorage.setItem("logged_in_type", "non_member");
 
                 /*$( "#clickable-adverts" ).css( "display", 'inline-block' );
@@ -392,7 +358,7 @@ $(document).on("submit","form#register_non_member",function(e)
             else
             {
                 // alert(data.result);
-                $("#registration_response").html('<div class="alert alert-danger center-align">'+"Please try again. Something went wrong"+'</div>').fadeIn( "slow");
+                $("#registration_response").html('<div class="alert alert-danger center-align">'+data.result+'</div>').fadeIn( "slow");
               
             }
             $( "#loader-wrapper" ).addClass( "display_none" );
@@ -474,6 +440,12 @@ function load_messages()
 $$(document).on('pageInit', '.page[data-page="members"]', function (e) 
 {
 	get_map_home();
+})
+
+$$(document).on('pageInit', '.page[data-page="advertisments"]', function (e) 
+{
+	
+	get_adverts();
 })
 
 function get_map_home() 
@@ -732,5 +704,59 @@ function get_map_home()
 	map.fitBounds(bounds);
 	drop();
   });
+
+}
+
+function get_member_details()
+{
+
+	var service = new Login_service();
+	service.initialize().done(function () {
+		console.log("Service initialized");
+	});
+
+	var job_seeker_id = window.localStorage.getItem("job_seeker_id");
+
+    $( "#loader-wrapper" ).removeClass( "display_none" );
+	service.get_member_details(job_seeker_id).done(function (employees) {
+		var data = jQuery.parseJSON(employees);
+		if(data.message == "success")
+		{
+			// $( "#news-of-icpak" ).addClass( "display_block" );
+			$( "#seeker_profile" ).html( data.result );
+			window.localStorage.setItem("seeker_profile",data.result);
+			$( "#loader-wrapper" ).addClass( "display_none" );
+		}
+		
+		else
+		{
+			$( "#adverts_div" ).html( '<p>Unable to add load adverts</p>' );
+		}
+	});
+	
+}
+$$(document).on('pageInit', '.page[data-page="advert-single"]', function (e) 
+{
+	$( "#left-menu-button-default" ).addClass( "display_none" );
+	$( "#left-menu-button" ).removeClass( "display_none" );
+})
+
+function load_membership()
+{
+
+	var mainView = myApp.addView('.view-main');
+	
+	mainView.router.loadPage('about_membership.html');
+	$( "#left-menu-button-default" ).addClass( "display_none" );
+	$( "#left-menu-button" ).removeClass( "display_none" );
+		
+}
+function load_contact()
+{
+	var mainView = myApp.addView('.view-main');
+	
+	mainView.router.loadPage('contact.html');
+	$( "#left-menu-button-default" ).addClass( "display_none" );
+	$( "#left-menu-button" ).removeClass( "display_none" );
 
 }
