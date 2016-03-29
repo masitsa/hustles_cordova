@@ -1735,3 +1735,7 @@ display: none;
 }
 /*end of loader*/
 .center-align{margin:0 auto; text-align:center;}
+.logo
+{
+      padding: 20px;
+}
