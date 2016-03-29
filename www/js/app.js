@@ -225,6 +225,7 @@ $(document).on("submit","form#login_member",function(e)
 			
 			if(data.message == "success")
 			{
+
 				$("#login_response").html('<div class="alert alert-success center-align">'+"You have successfully logged in"+'</div>').fadeIn( "slow");
 
 				// alert(data.message);
@@ -448,6 +449,7 @@ $$(document).on('pageInit', '.page[data-page="members"]', function (e)
 
 $$(document).on('pageInit', '.page[data-page="advertisments"]', function (e) 
 {
+
 	$( "#profile-icon" ).removeClass( "display_none" );
 	get_adverts();
 })
@@ -718,11 +720,10 @@ function get_member_details()
 	service.initialize().done(function () {
 		console.log("Service initialized");
 	});
-
-	var job_seeker_id = window.localStorage.getItem("job_seeker_id");
+	var job_seeker = window.localStorage.getItem("job_seeker_id");
 
     $( "#loader-wrapper" ).removeClass( "display_none" );
-	service.get_member_details(1).done(function (employees) {
+	service.get_member_details(job_seeker).done(function (employees) {
 		var data = jQuery.parseJSON(employees);
 		if(data.message == "success")
 		{

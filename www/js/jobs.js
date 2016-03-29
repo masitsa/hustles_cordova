@@ -48,8 +48,8 @@ var Jobs_service = function() {
         var request = url + "advertising/time_to_leave/" + advert_id;
         return $.ajax({url: request});
     }
-    this.get_advertisments = function() {
-		var request = url + "advertising/get_adverts";
+    this.get_advertisments = function(job_seeker) {
+		var request = url + "advertising/get_adverts/"+job_seeker;
         return $.ajax({url: request});
     }
 
@@ -459,9 +459,10 @@ function get_adverts()
 	// }
 	// else
 	// {
+		var job_seeker = window.localStorage.getItem("job_seeker_id");
 
 	    $( "#loader-wrapper" ).removeClass( "display_none" );
-		service.get_advertisments().done(function (employees) {
+		service.get_advertisments(job_seeker).done(function (employees) {
 			var data = jQuery.parseJSON(employees);
 			if(data.message == "success")
 			{
