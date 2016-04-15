@@ -195,6 +195,7 @@ $(document).ready(function(){
 	//user hasn't logged in. Open login page
 	else
 	{
+		$( "#profile-icon" ).addClass( "display_none" );
 		mainView.router.loadPage('sign_in.html');
 	}
 
@@ -224,6 +225,7 @@ $(document).on("submit","form#login_member",function(e)
 			
 			if(data.message == "success")
 			{
+
 				$("#login_response").html('<div class="alert alert-success center-align">'+"You have successfully logged in"+'</div>').fadeIn( "slow");
 
 				// alert(data.message);
@@ -231,6 +233,7 @@ $(document).on("submit","form#login_member",function(e)
 				window.localStorage.setItem("password", $("input[name=password]").val());
 				window.localStorage.setItem("logged_in", "yes");
 				window.localStorage.setItem("logged_in_type", "member");
+				window.localStorage.setItem("job_seeker_id", data.job_seeker_id);
 				$( "#profile-icon" ).removeClass( "display_none" );
 
 				myApp.closeModal('.popup-signin-member');
@@ -286,6 +289,8 @@ $(document).on("submit","form#login_non_member",function(e)
 				window.localStorage.setItem("logged_in", "yes");
 				window.localStorage.setItem("job_seeker_id", data.job_seeker_id);
 				window.localStorage.setItem("logged_in_type", "non_member");
+
+				$( "#profile-icon" ).removeClass( "display_none" );
 
 				myApp.closeModal('.popup-signin-non-member');
 				//get_map_home();
@@ -444,7 +449,8 @@ $$(document).on('pageInit', '.page[data-page="members"]', function (e)
 
 $$(document).on('pageInit', '.page[data-page="advertisments"]', function (e) 
 {
-	
+
+	$( "#profile-icon" ).removeClass( "display_none" );
 	get_adverts();
 })
 
@@ -714,11 +720,10 @@ function get_member_details()
 	service.initialize().done(function () {
 		console.log("Service initialized");
 	});
-
-	var job_seeker_id = window.localStorage.getItem("job_seeker_id");
+	var job_seeker = window.localStorage.getItem("job_seeker_id");
 
     $( "#loader-wrapper" ).removeClass( "display_none" );
-	service.get_member_details(job_seeker_id).done(function (employees) {
+	service.get_member_details(job_seeker).done(function (employees) {
 		var data = jQuery.parseJSON(employees);
 		if(data.message == "success")
 		{
@@ -737,9 +742,11 @@ function get_member_details()
 }
 $$(document).on('pageInit', '.page[data-page="advert-single"]', function (e) 
 {
+	$( "#profile-icon" ).addClass( "display_none" );
 	$( "#left-menu-button-default" ).addClass( "display_none" );
 	$( "#left-menu-button" ).removeClass( "display_none" );
 })
+
 
 function load_membership()
 {
@@ -749,6 +756,7 @@ function load_membership()
 	mainView.router.loadPage('about_membership.html');
 	$( "#left-menu-button-default" ).addClass( "display_none" );
 	$( "#left-menu-button" ).removeClass( "display_none" );
+
 		
 }
 function load_contact()
@@ -759,4 +767,14 @@ function load_contact()
 	$( "#left-menu-button-default" ).addClass( "display_none" );
 	$( "#left-menu-button" ).removeClass( "display_none" );
 
+}
+function load_profile()
+{
+	var mainView = myApp.addView('.view-main');
+
+	mainView.router.loadPage('profile.html');
+	
+	get_member_details();
+	$( "#left-menu-button-default" ).addClass( "display_none" );
+	$( "#left-menu-button" ).removeClass( "display_none" );
 }

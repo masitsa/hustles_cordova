@@ -83,7 +83,7 @@ margin: 0;
 padding: 0
 }
 a.closebutton {
-  color: #ffffff;
+  color: #222222;
   float: right;
   font-size: 25px;
   padding: 5px 10px;
@@ -365,6 +365,7 @@ body{font-family: 'Open Sans', sans-serif;}
 }
 .pro-content > h4 {
   background: #3949ab none repeat scroll 0 0;
+  border-radius: 10px;
   color: #fff;
   display: inline-block;
   font-size: 13px;
@@ -1015,15 +1016,14 @@ width: 115px;}
   padding: 10px;
 }
 .registerbody {
-  background: rgba(0, 0, 0, 0) url("img/login-bg.png") no-repeat scroll center center / cover ;
-  color: #ffffff;
+  color: #222222;
   height: 100%;
 }
 .register-content .inputbox > input {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: 1px solid #5c5c5c;
   box-sizing: border-box;
-  color: #ffffff;
+  color: #222222;
   display: block;
   height: 57px;
   margin-top: 5px;
@@ -1032,31 +1032,31 @@ width: 115px;}
   width: 100%;
 }
 .inputbox > span {
-  color: #fff;
+  color: #222222;
 }
 .inputbox {
   padding: 11px 0;
 }
 .register-content h3 {
-  color: #fff;
+  color: #222222;
   font-size: 20px;
   font-weight: bolder;
   padding: 15px 0;
   text-align: center;
 }
 .register-content > p {
-  color: #fff;
+  color: #222222;
   text-align: center;
 }
 .register-content a {
-  color: #fff;
+  color: #222222;
 }
 .register-content a i {
-  color: #fff;
+  color: #222222;
   font-size: 25px;
 }
 .register-content .inputbox > a {
-  color: #fff;
+  color: #222222;
   float: right;
   margin-bottom: 10px;
 }
@@ -1735,3 +1735,15 @@ display: none;
 }
 /*end of loader*/
 .center-align{margin:0 auto; text-align:center;}
+.logo
+{
+	padding: 20px;
+}
+.table {
+	border-collapse: collapse !important;
+}
+.table-bordered th,
+.table-bordered td {
+	border: 1px solid #ddd !important;
+}
+.youtube .thumb{position: relative !important;}
